@@ -100,8 +100,8 @@ function postEvent(req, res) {
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     usersAttending: req.body.usersAttending,
-    startTime: req.body.startTime,
-    endTime: req.body.endTime,
+    startTime: new Date(req.body.startTime),
+    endTime: new Date(req.body.endTime),
   })
   fs.writeFile(EVENTS_PATH, JSON.stringify(events), function(err) {
     if(err) {
@@ -136,7 +136,7 @@ function postThread(req, res) {
   events.push({
     id: id,
     postText: req.body.postText,
-    timestamp: Date.now(),
+    timestamp: new Date(),
     author: req.body.author,
     category: req.body.category,
     comments: req.body.comments
@@ -179,7 +179,7 @@ function postComment(req, res) {
   
   parentThread.comments.push({
     commentText: req.body.commentText,
-    timestamp: Date.now(),
+    timestamp: new Date(),
     author: req.body.author
   })
   fs.writeFile(THREADS_PATH, JSON.stringify(threads), function(err) {
