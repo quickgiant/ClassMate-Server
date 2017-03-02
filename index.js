@@ -101,8 +101,8 @@ function postEvent(req, res) {
     latitude: parseFloat(req.body.latitude),
     longitude: parseFloat(req.body.longitude),
     usersAttending: parseInt(req.body.usersAttending),
-    startTime: new Date(req.body.startTime),
-    endTime: new Date(req.body.endTime),
+    startTime: new Date(parseInt(req.body.startTime)),
+    endTime: new Date(parseInt(req.body.endTime)),
   })
   fs.writeFile(EVENTS_PATH, JSON.stringify(events), function(err) {
     if(err) {
