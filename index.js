@@ -98,9 +98,9 @@ function postEvent(req, res) {
     id: id,
     title: req.body.title,
     semanticLocation: req.body.semanticLocation,
-    latitude: req.body.latitude,
-    longitude: req.body.longitude,
-    usersAttending: req.body.usersAttending,
+    latitude: parseFloat(req.body.latitude),
+    longitude: parseFloat(req.body.longitude),
+    usersAttending: parseInt(req.body.usersAttending),
     startTime: new Date(req.body.startTime),
     endTime: new Date(req.body.endTime),
   })
@@ -140,7 +140,7 @@ function postThread(req, res) {
     timestamp: new Date(),
     author: req.body.author,
     category: req.body.category,
-    comments: req.body.comments
+    comments: JSON.parse(req.body.comments)
   })
 
   fs.writeFile(THREADS_PATH, JSON.stringify(threads), function(err) {
